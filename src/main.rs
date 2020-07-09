@@ -1,6 +1,7 @@
 use actix_files as fs;
 use actix_files::NamedFile;
 use actix_web::{get, middleware, App, HttpResponse, HttpServer, Responder, Result};
+use actix_web_middleware_redirect_scheme::RedirectSchemeBuilder;
 use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
 use yarte::Template;
 
@@ -52,6 +53,7 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .wrap(middleware::NormalizePath)
+            .wrap(RedirectSchemeBuilder::new().build())
             .wrap(middleware::Compress::default())
             .wrap(middleware::DefaultHeaders::new()
                 .header("Strict-Transport-Security", "max-age=63072000; includeSubdomains; preload")

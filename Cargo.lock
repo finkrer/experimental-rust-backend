@@ -7,6 +7,7 @@ dependencies = [
  "actix-files",
  "actix-rt",
  "actix-web",
+ "actix-web-middleware-redirect-scheme",
  "openssl",
  "yarte",
 ]
@@ -295,6 +296,17 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
+]
+
+[[package]]
+name = "actix-web-middleware-redirect-scheme"
+version = "2.3.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c968c4a827f65ee23276a0870b46deffdd4acfde771993c32f53aa1fcc89765a"
+dependencies = [
+ "actix-service",
+ "actix-web",
+ "futures",
 ]
 
 [[package]]
