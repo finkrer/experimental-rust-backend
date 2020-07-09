@@ -11,5 +11,5 @@ services:
     volumes:
       - ./static:/usr/src/actix/static
       - ./templates:/usr/src/actix/templates
-      - /etc/letsencrypt:/etc/letsencrypt
+      - /home/finkrer/droplet/letsencrypt:/etc/letsencrypt
     restart: unless-stopped
