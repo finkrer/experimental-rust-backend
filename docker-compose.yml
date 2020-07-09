@@ -6,10 +6,10 @@ services:
     container_name: actix
     working_dir: /usr/src/actix
     ports:
-      - 8080:8080
-      - 8443:8443
+      - 80:8080
+      - 443:8443
     volumes:
       - ./static:/usr/src/actix/static
       - ./templates:/usr/src/actix/templates
-      - /home/finkrer/droplet/letsencrypt:/etc/letsencrypt
+      - /etc/letsencrypt:/etc/letsencrypt
     restart: unless-stopped

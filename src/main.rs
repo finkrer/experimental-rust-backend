@@ -1,4 +1,5 @@
 use actix_files as fs;
+use actix_files::NamedFile;
 use actix_web::{get, middleware, App, HttpResponse, HttpServer, Responder};
 use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
 use yarte::Template;
@@ -38,6 +39,11 @@ async fn cat_photos() -> impl Responder {
     HttpResponse::from_template(CatPhotosTemplate {})
 }
 
+#[get("/robots.txt")]
+async fn robots() -> Result<NamedFile> {
+    Ok(NamedFile::open("./static/robots.txt")?)
+}
+
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
     let mut builder = SslAcceptor::mozilla_intermediate(SslMethod::tls()).unwrap();
@@ -58,9 +64,10 @@ async fn main() -> std::io::Result<()> {
             .service(index)
             .service(cat_photos)
             .service(fs::Files::new("/s/", "/usr/src/actix/static"))
+            .service(robots)
     })
-    .bind("127.0.0.1:8080")?
-    .bind_openssl("127.0.0.1:8443", builder)?
+    .bind("0.0.0.0:8080")?
+    .bind_openssl("0.0.0.0:8443", builder)?
     .run()
     .await
 }
