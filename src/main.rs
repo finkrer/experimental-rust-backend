@@ -1,6 +1,6 @@
 use actix_files as fs;
 use actix_files::NamedFile;
-use actix_web::{get, middleware, App, HttpResponse, HttpServer, Responder};
+use actix_web::{get, middleware, App, HttpResponse, HttpServer, Responder, Result};
 use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
 use yarte::Template;
 
