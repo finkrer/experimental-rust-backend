@@ -27,7 +27,7 @@ async fn main() -> std::io::Result<()> {
             .service(routes::robots)
     })
     .bind("0.0.0.0:8080")?
-    .bind_openssl("0.0.0.0:8443", ssl::get_builder())?
+    .bind_rustls("0.0.0.0:8443", ssl::get_config())?
     .run()
     .await
 }
