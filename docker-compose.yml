@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  actix:
+    build: .
+    container_name: actix
+    working_dir: /usr/src/actix
+    ports:
+      - 8080:8080
+      - 8443:8443
+    volumes:
+      - ./static:/usr/src/actix/static
+      - ./templates:/usr/src/actix/templates
+      - /home/finkrer/droplet/letsencrypt:/etc/letsencrypt
+    restart: unless-stopped

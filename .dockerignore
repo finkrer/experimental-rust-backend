@@ -1,0 +1,7 @@
+target/
+static/
+.dockerignore
+.gitignore
+Dockerfile
+docker-compose.yml
+README.md

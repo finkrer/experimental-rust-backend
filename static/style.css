@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Nova+Flat&family=Roboto+Slab&display=swap');
+body {
+    margin: 1em auto;
+    max-width: 45em;
+    padding: 0 .62em;
+    font: 1.2em/1.62 'Roboto', helvetica, arial, sans-serif;
+    color: #252525;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.sitename {
+    font-family: 'Nova Flat', cursive;
+    font-size: 3em;
+    user-select: none;
+    display: inline;
+}
+
+aside {
+    font-weight: normal;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+.sitename a,
+.sitename a:visited {
+    all: inherit;
+    color: hsl(10, 100%, 60%);
+    cursor: pointer;
+}
+
+menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+menu>li {
+    display: inline;
+}
+
+menu>li>a {
+    margin: 1em;
+    padding: 0.4em;
+    font-size: 0.8em;
+    border-radius: 0.3em;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+a.link1 {
+    color: hsl(10, 100%, 65%);
+    background-color: hsl(10, 100%, 95%);
+}
+
+a.link1:hover {
+    filter: brightness(102%);
+}
+
+a.link2 {
+    color: hsl(260, 100%, 60%);
+    background-color: hsl(260, 100%, 95%);
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: hsl(0, 0%, 80%);
+    }
+    a.link1 {
+        color: hsl(10, 100%, 0%);
+        background-color: hsl(10, 100%, 75%);
+    }
+    a.link1:hover {
+        background-color: hsl(10, 100%, 77%);
+    }
+    .sitename {
+        font-family: 'Nova Flat', cursive;
+        font-size: 3em;
+        color: hsl(10, 100%, 70%);
+        user-select: none;
+        display: inline;
+    }
+}
+
+@media print {
+    body {
+        max-width: none;
+    }
+}
