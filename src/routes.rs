@@ -1,7 +1,7 @@
 use crate::templates::FromTemplate;
 
 use actix_files::{Files, NamedFile};
-use actix_web::{web, get, HttpResponse, Responder, Result};
+use actix_web::{web, get, http::StatusCode, HttpResponse, HttpRequest, Responder, Result};
 use yarte::Template;
 
 pub fn config(cfg: &mut web::ServiceConfig) {
@@ -31,4 +31,13 @@ async fn cat_photos() -> impl Responder {
 #[get("/robots.txt")]
 async fn robots() -> Result<NamedFile> {
     Ok(NamedFile::open("./static/robots.txt")?)
+}
+
+pub async fn error(req: HttpRequest) -> impl Responder {
+    #[derive(Template)]
+    #[template(path = "404")]
+    struct ErrorTemplate {
+        path: String
+    }
+    HttpResponse::from_template_with_code(ErrorTemplate {path: req.path().to_string()}, StatusCode::NOT_FOUND)
 }
