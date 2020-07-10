@@ -11,5 +11,6 @@ services:
     volumes:
       - ./static:/usr/src/actix/static
       - ./templates:/usr/src/actix/templates
+      - ./target:/usr/src/actix/target
       - /etc/letsencrypt:/etc/letsencrypt
     restart: unless-stopped
