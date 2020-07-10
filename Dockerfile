@@ -13,9 +13,6 @@ RUN mkdir src/
 RUN echo "fn main() { println!(\"Build broke\\nUnderstandable, have a nice day\") }" > src/main.rs
 RUN cargo build --release
 
-RUN ./add_dep.sh yarte 0.12.0
-RUN cargo build --release
-
 RUN ./add_dep.sh actix-files 0.2.2
 RUN cargo build --release
 

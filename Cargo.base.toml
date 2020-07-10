@@ -8,3 +8,4 @@ edition = "2018"
 actix-rt = "1.1.1"
 actix-web = { version = "2.0.0", features = ["rustls"] }
 rustls = "0.16.0"
+yarte = "0.12.0"
