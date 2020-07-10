@@ -1,8 +1,16 @@
 use crate::templates::FromTemplate;
 
-use actix_files::NamedFile;
-use actix_web::{get, HttpResponse, Responder, Result};
+use actix_files::{Files, NamedFile};
+use actix_web::{web, get, HttpResponse, Responder, Result};
 use yarte::Template;
+
+pub fn config(cfg: &mut web::ServiceConfig) {
+    cfg
+    .service(index)
+    .service(cat_photos)
+    .service(robots)
+    .service(Files::new("/s/", "/usr/src/actix/static"));
+}
 
 #[get("/")]
 async fn index() -> impl Responder {
