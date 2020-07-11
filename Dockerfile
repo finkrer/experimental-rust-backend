@@ -4,9 +4,6 @@ RUN apk add -U --no-cache musl-dev
 
 WORKDIR /usr/src/actix
 
-COPY add_dep.sh add_dep.sh
-RUN chmod +x add_dep.sh
-
 COPY Cargo.toml Cargo.toml
 
 RUN mkdir src/

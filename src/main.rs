@@ -18,7 +18,7 @@ async fn main() -> std::io::Result<()> {
             .default_service(web::route().to(routes::error))
     })
     .bind("0.0.0.0:8080")?
-    .bind_rustls("0.0.0.0:8443", ssl::get_config())?
+    .bind_openssl("0.0.0.0:8443", ssl::get_builder())?
     .run()
     .await
 }
