@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   actix:
-    build: .
+    image: actix:latest
     container_name: actix
     working_dir: /usr/src/actix
     ports:
@@ -11,6 +11,5 @@ services:
     volumes:
       - ./static:/usr/src/actix/static
       - ./templates:/usr/src/actix/templates
-      - ./target/alpine:/usr/src/actix/target
       - /etc/letsencrypt:/etc/letsencrypt
     restart: unless-stopped
