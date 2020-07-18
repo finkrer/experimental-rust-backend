@@ -10,4 +10,6 @@ COPY . .
 
 RUN --mount=type=cache,mode=0777,target=/usr/src/actix/target cargo build --release; cp /usr/src/actix/target/release/actix /bin
 
+EXPOSE 8080
+
 CMD ["actix"]
