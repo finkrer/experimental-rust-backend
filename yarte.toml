@@ -1,6 +1,0 @@
-[main]
-dir = "/usr/src/actix/templates"
-
-[partials]
-header = "header"
-meta = "meta"

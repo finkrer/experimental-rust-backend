@@ -1,43 +1,29 @@
-use crate::templates::FromTemplate;
-
-use actix_files::{Files, NamedFile};
-use actix_web::{web, get, http::StatusCode, HttpResponse, HttpRequest, Responder, Result};
-use yarte::Template;
+use crate::files::find_file;
+use actix_files::NamedFile;
+use actix_web::{get, http, web, HttpRequest, HttpResponse, Responder, Result};
+use either::Right;
+use std::fs::File;
 
 pub fn config(cfg: &mut web::ServiceConfig) {
-    cfg
-    .service(index)
-    .service(cat_photos)
-    .service(robots)
-    .service(Files::new("/s/", "/usr/src/actix/static"));
+    cfg.service(get);
 }
 
-#[get("/")]
-async fn index() -> impl Responder {
-    #[derive(Template)]
-    #[template(path = "index")]
-    struct IndexTemplate;
-    HttpResponse::from_template(IndexTemplate {})
-}
-
-#[get("/cat-photos/")]
-async fn cat_photos() -> impl Responder {
-    #[derive(Template)]
-    #[template(path = "cat-photos/index")]
-    struct CatPhotosTemplate;
-    HttpResponse::from_template(CatPhotosTemplate {})
-}
-
-#[get("/robots.txt")]
-async fn robots() -> Result<NamedFile> {
-    Ok(NamedFile::open("./static/robots.txt")?)
+#[get("/{path:.*}")]
+async fn get(req: HttpRequest, path: web::Path<String>) -> Result<impl Responder> {
+    let path = find_file(&path.to_string());
+    let status_code = match path {
+        Right(_) => http::StatusCode::OK,
+        _ => http::StatusCode::NOT_FOUND,
+    };
+    println!("{:?}", path);
+    let result = File::open(&path)
+        .and_then(|file| NamedFile::from_file(file, &path))?
+        .set_status_code(status_code);
+    let response = result.into_response(&req)?;
+    Ok(response)
 }
 
 pub async fn error(req: HttpRequest) -> impl Responder {
-    #[derive(Template)]
-    #[template(path = "404")]
-    struct ErrorTemplate {
-        path: String
-    }
-    HttpResponse::from_template_with_code(ErrorTemplate {path: req.path().to_string()}, StatusCode::NOT_FOUND)
+    let res = format!("Method not allowed: {}", req.method());
+    HttpResponse::MethodNotAllowed().body(res)
 }

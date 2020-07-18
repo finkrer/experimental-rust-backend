@@ -2,8 +2,7 @@
 
 FROM rust:alpine
 
-RUN apk add -U --no-cache musl-dev openssl openssl-dev libc6-compat
-RUN ln -s /lib64/ld-linux-x86-64.so.2 /lib/ld64.so.1
+RUN apk add -U --no-cache musl-dev
 
 WORKDIR /usr/src/actix
 
